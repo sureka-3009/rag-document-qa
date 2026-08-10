@@ -7,9 +7,9 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import OllamaEmbeddings
 
 # ─── Page Config ───────────────────────────────────────────────
-st.set_page_config(page_title="RAG Document Q&A", page_icon="📄", layout="centered")
+st.set_page_config(page_title="RAG Document Q&A", page_icon="\U0001F4C4", layout="centered")
 
-st.title("📄 AI Document Q&A")
+st.title(" AI Document Q&A")
 st.caption("Upload a PDF and ask questions — powered by Llama 3.2 + RAG")
 
 # ─── Session State ─────────────────────────────────────────────
@@ -22,7 +22,7 @@ if "doc_name" not in st.session_state:
 
 # ─── Sidebar ───────────────────────────────────────────────────
 with st.sidebar:
-    st.header("📂 Upload Document")
+    st.header(" Upload Document")
     uploaded_file = st.file_uploader("Upload a PDF", type=["pdf"])
 
     if uploaded_file:
@@ -50,11 +50,11 @@ with st.sidebar:
                 st.session_state.doc_name = uploaded_file.name
                 st.session_state.messages = []
 
-            st.success(f"✅ '{uploaded_file.name}' indexed successfully!")
-            st.info(f"📊 {len(chunks)} chunks created")
+            st.success(f" '{uploaded_file.name}' indexed successfully!")
+            st.info(f" {len(chunks)} chunks created")
 
     st.divider()
-    if st.button("🗑️ Clear Chat"):
+    if st.button(" Clear Chat"):
         st.session_state.messages = []
         st.rerun()
 
@@ -68,13 +68,13 @@ for message in st.session_state.messages:
 
 # ─── Chat Input
 if st.session_state.vectorstore is None:
-    st.info("👆 Please upload a PDF from the sidebar to get started.")
+    st.info(" Please upload a PDF from the sidebar to get started.")
 
 prompt = st.chat_input("Ask a question about your document...")
 
 if prompt:
     if st.session_state.vectorstore is None:
-        st.warning("⚠️ Please upload a PDF document first.")
+        st.warning(" Please upload a PDF document first.")
     else:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
@@ -108,7 +108,7 @@ Answer:"""
                         "content": reply
                     })
 
-                    with st.expander("📚 Source chunks used"):
+                    with st.expander(" Source chunks used"):
                         for i, doc in enumerate(docs):
                             st.markdown(f"**Chunk {i+1}:**")
                             st.markdown(doc.page_content)
